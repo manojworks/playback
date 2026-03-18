@@ -1,7 +1,7 @@
 import { Component, OnInit, computed, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AudioService, PlaylistService, StorageService, Track } from '@app/core';
-import { ProgressBarComponent, IconComponent } from '@app/shared';
+import { ProgressBarComponent, IconComponent, TopBarComponent, SideNavComponent, SearchPanelComponent, ListingsPanelComponent } from '@app/shared';
 import { ControlsComponent } from './controls.component';
 import { PlaylistComponent } from './playlist.component';
 
@@ -12,62 +12,77 @@ interface PlayerState {
 @Component({
   selector: 'app-player',
   standalone: true,
-  imports: [CommonModule, ProgressBarComponent, IconComponent, ControlsComponent, PlaylistComponent],
+  imports: [CommonModule, ProgressBarComponent, IconComponent, TopBarComponent, SideNavComponent, SearchPanelComponent, ListingsPanelComponent, ControlsComponent, PlaylistComponent],
   template: `
     <div class="player-container">
-      <div class="player-main">
-        <!-- Album Art / Visualization -->
-        <div class="album-art">
-          <img 
-            *ngIf="currentTrack()?.coverUrl"
-            [src]="currentTrack()!.coverUrl"
-            [alt]="currentTrack()!.title || 'Album art'"
-          />
-          <div *ngIf="!currentTrack()?.coverUrl" class="placeholder">
-            <app-icon name="play" size="xl"></app-icon>
+      <app-top-bar></app-top-bar>
+
+      <div class="flex flex-1 h-[calc(100vh-3.5rem)] overflow-hidden">
+        <app-side-nav></app-side-nav>
+
+        <main class="flex-1 overflow-auto">
+          <app-search-panel></app-search-panel>
+
+          <app-listings-panel></app-listings-panel>
+
+          <!-- Music player UI (kept for later) -->
+          <div *ngIf="false">
+            <div class="player-main">
+              <!-- Album Art / Visualization -->
+              <div class="album-art">
+                <img 
+                  *ngIf="currentTrack()?.coverUrl"
+                  [src]="currentTrack()!.coverUrl"
+                  [alt]="currentTrack()!.title || 'Album art'"
+                />
+                <div *ngIf="!currentTrack()?.coverUrl" class="placeholder">
+                  <app-icon name="play" size="xl"></app-icon>
+                </div>
+              </div>
+
+              <!-- Track Info -->
+              <div class="track-info">
+                <h2 class="track-title">{{ currentTrack()?.title || 'No track selected' }}</h2>
+                <p class="track-artist">{{ currentTrack()?.artist || 'Unknown Artist' }}</p>
+              </div>
+
+              <!-- Progress Bar -->
+              <app-progress-bar
+                [currentValue]="audioState().currentTime"
+                [max]="audioState().duration"
+                [showLabels]="true"
+                (valueChange)="onSeek($event)"
+                ariaLabel="Seek track"
+              ></app-progress-bar>
+
+              <!-- Controls -->
+              <app-controls
+                [isPlaying]="audioState().isPlaying"
+                [volume]="audioState().volume"
+                [isMuted]="audioState().isMuted"
+                [repeatMode]="playlistState().repeatMode"
+                [isShuffled]="playlistState().isShuffled"
+                (togglePlay)="togglePlay()"
+                (toggleMute)="toggleMute()"
+                (volumeChange)="onVolumeChange($event)"
+                (nextTrack)="playNext()"
+                (prevTrack)="playPrevious()"
+                (toggleShuffle)="toggleShuffle()"
+                (repeatModeChange)="setRepeatMode($event)"
+              ></app-controls>
+            </div>
+
+            <!-- Playlist -->
+            <app-playlist
+              [tracks]="playlistState().tracks"
+              [currentTrackIndex]="playlistState().currentTrackIndex"
+              (selectTrack)="selectTrack($event)"
+              (removeTrack)="removeTrack($event)"
+              (addTracks)="addTrack($event)"
+            ></app-playlist>
           </div>
-        </div>
-
-        <!-- Track Info -->
-        <div class="track-info">
-          <h2 class="track-title">{{ currentTrack()?.title || 'No track selected' }}</h2>
-          <p class="track-artist">{{ currentTrack()?.artist || 'Unknown Artist' }}</p>
-        </div>
-
-        <!-- Progress Bar -->
-        <app-progress-bar
-          [currentValue]="audioState().currentTime"
-          [max]="audioState().duration"
-          [showLabels]="true"
-          (valueChange)="onSeek($event)"
-          ariaLabel="Seek track"
-        ></app-progress-bar>
-
-        <!-- Controls -->
-        <app-controls
-          [isPlaying]="audioState().isPlaying"
-          [volume]="audioState().volume"
-          [isMuted]="audioState().isMuted"
-          [repeatMode]="playlistState().repeatMode"
-          [isShuffled]="playlistState().isShuffled"
-          (togglePlay)="togglePlay()"
-          (toggleMute)="toggleMute()"
-          (volumeChange)="onVolumeChange($event)"
-          (nextTrack)="playNext()"
-          (prevTrack)="playPrevious()"
-          (toggleShuffle)="toggleShuffle()"
-          (repeatModeChange)="setRepeatMode($event)"
-        ></app-controls>
+        </main>
       </div>
-
-      <!-- Playlist -->
-      <app-playlist
-        [tracks]="playlistState().tracks"
-        [currentTrackIndex]="playlistState().currentTrackIndex"
-        (selectTrack)="selectTrack($event)"
-        (removeTrack)="removeTrack($event)"
-        (addTracks)="addTrack($event)"
-      ></app-playlist>
     </div>
   `,
   styles: [`
