@@ -1,0 +1,18 @@
+<div class="progress-container" (click)="onProgressClick($event)" [attr.aria-label]="ariaLabel">
+  <div class="progress-bar">
+    <div
+      class="progress-fill"
+      [style.width.%]="currentValue"
+    ></div>
+    <div
+      class="progress-thumb"
+      [style.left.%]="currentValue"
+      (mousedown)="startDrag($event)"
+      (touchstart)="startDrag($event)"
+    ></div>
+  </div>
+  <div *ngIf="showLabels" class="progress-labels">
+    <span class="current-time">{{ formatTime(currentValue * max / 100) }}</span>
+    <span class="max-time">{{ formatTime(max) }}</span>
+  </div>
+</div>

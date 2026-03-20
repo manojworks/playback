@@ -1,3 +1,3 @@
-export { PlayerComponent } from './player.component';
-export { ControlsComponent } from './controls.component';
-export { PlaylistComponent } from './playlist.component';
+export { DashboardComponent } from './dashboard/dashboard.component';
+export { ControlsComponent } from './controls/controls.component';
+export { PlaylistComponent } from './playlist/playlist.component';

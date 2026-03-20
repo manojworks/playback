@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MusicPlayerRoutingModule } from './music-player-routing.module';
-import { PlayerComponent } from './components';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
-  imports: [CommonModule, MusicPlayerRoutingModule, PlayerComponent]
+  imports: [CommonModule, MusicPlayerRoutingModule, DashboardComponent]
 })
 export class MusicPlayerModule {}

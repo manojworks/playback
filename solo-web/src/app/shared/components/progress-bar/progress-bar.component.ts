@@ -5,82 +5,8 @@ import { CommonModule } from '@angular/common';
   selector: 'app-progress-bar',
   standalone: true,
   imports: [CommonModule],
-  template: `
-    <div class="progress-container" (click)="onProgressClick($event)" [attr.aria-label]="ariaLabel">
-      <div class="progress-bar">
-        <div 
-          class="progress-fill" 
-          [style.width.%]="currentValue"
-        ></div>
-        <div 
-          class="progress-thumb" 
-          [style.left.%]="currentValue"
-          (mousedown)="startDrag($event)"
-          (touchstart)="startDrag($event)"
-        ></div>
-      </div>
-      <div *ngIf="showLabels" class="progress-labels">
-        <span class="current-time">{{ formatTime(currentValue * max / 100) }}</span>
-        <span class="max-time">{{ formatTime(max) }}</span>
-      </div>
-    </div>
-  `,
-  styles: [`
-    .progress-container {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      width: 100%;
-      cursor: pointer;
-    }
-
-    .progress-bar {
-      position: relative;
-      height: 6px;
-      background-color: rgba(255, 255, 255, 0.2);
-      border-radius: 3px;
-      overflow: hidden;
-    }
-
-    .progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--color-blue), var(--color-pink));
-      transition: width 0.1s linear;
-      border-radius: 3px;
-    }
-
-    .progress-thumb {
-      position: absolute;
-      top: 50%;
-      width: 14px;
-      height: 14px;
-      background-color: white;
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-      opacity: 0;
-      transition: opacity 0.2s ease;
-    }
-
-    .progress-bar:hover .progress-thumb {
-      opacity: 1;
-    }
-
-    .progress-labels {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.875rem;
-      color: rgba(255, 255, 255, 0.7);
-    }
-
-    .current-time {
-      font-weight: 500;
-    }
-
-    .max-time {
-      text-align: right;
-    }
-  `]
+  templateUrl: './progress-bar.component.html',
+  styleUrls: ['./progress-bar.component.scss']
 })
 export class ProgressBarComponent {
   @Input() currentValue: number = 0;

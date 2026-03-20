@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
-import { PlayerComponent } from './components/player.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 export const MUSIC_PLAYER_ROUTES: Routes = [
   {
     path: '',
-    component: PlayerComponent
+    component: DashboardComponent
   }
 ];

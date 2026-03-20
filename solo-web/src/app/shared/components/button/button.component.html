@@ -1,0 +1,13 @@
+<button
+  [disabled]="disabled"
+  [class]="buttonClass"
+  (click)="onClick.emit()"
+  [attr.aria-label]="ariaLabel"
+>
+  <app-icon
+    *ngIf="icon"
+    [name]="icon"
+    [size]="size"
+  ></app-icon>
+  <span *ngIf="label">{{ label }}</span>
+</button>

@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PlayerComponent } from './components';
+import { DashboardComponent } from './components';
 
 const routes: Routes = [
   {
     path: '',
-    component: PlayerComponent
+    component: DashboardComponent
   }
 ];
 

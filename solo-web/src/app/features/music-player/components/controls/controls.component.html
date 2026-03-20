@@ -1,0 +1,64 @@
+<div class="controls">
+  <div class="control-group">
+    <app-button
+      icon="shuffle"
+      [variant]="isShuffled ? 'primary' : 'ghost'"
+      size="md"
+      ariaLabel="Toggle shuffle"
+      (onClick)="onToggleShuffle()"
+    ></app-button>
+
+    <app-button
+      icon="skip-prev"
+      variant="ghost"
+      size="lg"
+      ariaLabel="Previous track"
+      (onClick)="onPrevious()"
+    ></app-button>
+
+    <app-button
+      [icon]="isPlaying ? 'pause' : 'play'"
+      variant="primary"
+      size="lg"
+      ariaLabel="Play/Pause"
+      (onClick)="onTogglePlay()"
+    ></app-button>
+
+    <app-button
+      icon="skip-next"
+      variant="ghost"
+      size="lg"
+      ariaLabel="Next track"
+      (onClick)="onNext()"
+    ></app-button>
+
+    <app-button
+      [icon]="repeatModeIcon"
+      [variant]="repeatMode !== 'none' ? 'primary' : 'ghost'"
+      size="md"
+      [ariaLabel]="'Repeat: ' + repeatMode"
+      (onClick)="onCycleRepeat()"
+    ></app-button>
+  </div>
+
+  <div class="volume-control">
+    <app-button
+      [icon]="volumeIcon"
+      variant="ghost"
+      size="sm"
+      ariaLabel="Toggle mute"
+      (onClick)="onToggleMute()"
+    ></app-button>
+
+    <input
+      type="range"
+      min="0"
+      max="1"
+      step="0.01"
+      [value]="isMuted ? 0 : volume"
+      (input)="onVolumeChange($event)"
+      class="volume-slider"
+      aria-label="Volume"
+    />
+  </div>
+</div>

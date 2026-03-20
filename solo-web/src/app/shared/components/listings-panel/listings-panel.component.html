@@ -1,0 +1,24 @@
+<section class="bg-white/80 backdrop-blur-md rounded-lg shadow-sm mx-4 mb-4">
+  <div class="overflow-x-auto">
+    <table class="w-full table-fixed">
+      <thead>
+        <tr class="border-b-2 border-gray-300 bg-gray-50">
+          <th class="text-left py-3 px-4 font-semibold text-sm text-gray-800 w-1/5">Title</th>
+          <th class="text-left py-3 px-4 font-semibold text-sm text-gray-800 w-1/5">Singers</th>
+          <th class="text-left py-3 px-4 font-semibold text-sm text-gray-800 w-1/5">Composers</th>
+          <th class="text-left py-3 px-4 font-semibold text-sm text-gray-800 w-1/5">Movie</th>
+          <th class="text-left py-3 px-4 font-semibold text-sm text-gray-800 w-1/5">Info</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let song of songs" class="border-b border-gray-200 hover:bg-blue-50 transition-colors cursor-pointer">
+          <td class="py-3 px-4 text-sm text-gray-700 truncate">{{ song.title }}</td>
+          <td class="py-3 px-4 text-sm text-gray-700 truncate">{{ song.singers }}</td>
+          <td class="py-3 px-4 text-sm text-gray-700 truncate">{{ song.composers }}</td>
+          <td class="py-3 px-4 text-sm text-gray-700 truncate">{{ song.movie }}</td>
+          <td class="py-3 px-4 text-sm text-gray-700 truncate">{{ song.info }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
