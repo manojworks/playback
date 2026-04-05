@@ -58,7 +58,7 @@ export class SearchService {
     }
   ];
 
-  private searchResultsSubject = new BehaviorSubject<Song[]>(this.allSongs);
+  private searchResultsSubject = new BehaviorSubject<Song[]>([]);
   public searchResults$ = this.searchResultsSubject.asObservable();
 
   constructor() {}
@@ -79,10 +79,10 @@ export class SearchService {
    * Get all songs without filtering
    * @returns Observable of all songs
    */
-  getAllSongs(): Observable<Song[]> {
-    this.searchResultsSubject.next(this.allSongs);
-    return this.searchResults$;
-  }
+//   private getAllSongs(): Observable<Song[]> {
+//     this.searchResultsSubject.next(this.allSongs);
+//     return this.searchResults$;
+//   }
 
   /**
    * Filter songs by query

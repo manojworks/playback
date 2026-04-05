@@ -21,8 +21,8 @@ export class ListingsPanelComponent implements OnInit, OnDestroy {
   songs: Song[] = [];
 
   ngOnInit(): void {
-    // Load all songs by default
-    this.searchService.getAllSongs()
+    // Subscribe to search results - empty by default
+    this.searchService.searchResults$
       .pipe(takeUntil(this.destroy$))
       .subscribe(results => {
         this.songs = results;
