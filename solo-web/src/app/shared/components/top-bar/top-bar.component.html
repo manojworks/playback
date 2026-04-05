@@ -9,7 +9,7 @@
   <div class="flex-1 max-w-2xl mx-8">
     <mat-form-field appearance="outline" class="w-full">
       <mat-icon matPrefix class="text-gray-500">search</mat-icon>
-      <input matInput aria-label="Search" placeholder="Search in Drive" />
+      <input #searchInput matInput aria-label="Search" placeholder="Search for Music" (keyup.enter)="onSearch(searchInput.value)" />
       <button mat-icon-button matSuffix aria-label="Clear">
         <mat-icon>close</mat-icon>
       </button>
