@@ -1,0 +1,56 @@
+<div class="playlist-container">
+  <div class="playlist-header">
+    <h3>Playlist</h3>
+    <app-button
+      icon="add"
+      variant="primary"
+      size="sm"
+      ariaLabel="Add track"
+      (onClick)="onAddTrack()"
+    ></app-button>
+  </div>
+
+  <div class="file-input-wrapper">
+    <input
+      #fileInput
+      type="file"
+      multiple
+      accept="audio/*"
+      (change)="onFileSelected($event)"
+      style="display: none"
+      aria-label="Select audio files"
+    />
+  </div>
+
+  <div class="playlist">
+    <div
+      *ngIf="tracks.length === 0"
+      class="empty-playlist"
+    >
+      <app-icon name="music" size="lg"></app-icon>
+      <p>No tracks yet. Add your first track to get started!</p>
+    </div>
+
+    <div
+      *ngFor="let track of tracks; let i = index"
+      [class.track-item]="true"
+      [class.active]="i === currentTrackIndex"
+      (click)="onSelectTrack(i)"
+    >
+      <div class="track-number">{{ i + 1 }}</div>
+      <div class="track-details">
+        <div class="track-name">{{ track.title }}</div>
+        <div class="track-meta">{{ track.artist }} • {{ formatDuration(track.duration) }}</div>
+      </div>
+      <div (click)="$event.stopPropagation()">
+        <app-button
+          icon="remove"
+          variant="ghost"
+          size="sm"
+          ariaLabel="Remove track"
+          (onClick)="onRemoveTrack(i)"
+        ></app-button>
+      </div>
+    </div>
+  </div>
+</div>

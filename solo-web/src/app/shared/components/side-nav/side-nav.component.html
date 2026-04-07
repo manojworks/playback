@@ -1,0 +1,24 @@
+<!--TODO: Replace icons with appropriate icons -->
+
+<nav class="flex flex-col gap-1 p-2 w-64 flex-shrink-0 bg-white border-r border-gray-200 overflow-y-auto">
+  <button mat-button class="justify-start gap-3 rounded-lg hover:bg-gray-100" (click)="$event.stopPropagation()">
+    <mat-icon class="text-blue-600">folder</mat-icon>
+    <span class="text-gray-700">Home</span>
+  </button>
+  <button mat-button class="justify-start gap-3 rounded-lg hover:bg-gray-100" (click)="$event.stopPropagation()">
+    <mat-icon class="text-green-600">people</mat-icon>
+    <span class="text-gray-700">My Playlists</span>
+  </button>
+  <button mat-button class="justify-start gap-3 rounded-lg hover:bg-gray-100" (click)="$event.stopPropagation()">
+    <mat-icon class="text-orange-600">schedule</mat-icon>
+    <span class="text-gray-700">Recent</span>
+  </button>
+  <button mat-button class="justify-start gap-3 rounded-lg hover:bg-gray-100" (click)="$event.stopPropagation()">
+    <mat-icon class="text-red-600">star</mat-icon>
+    <span class="text-gray-700">Trending</span>
+  </button>
+  <button mat-button class="justify-start gap-3 rounded-lg hover:bg-gray-100" (click)="$event.stopPropagation()">
+    <mat-icon class="text-gray-600">delete</mat-icon>
+    <span class="text-gray-700">Favourites</span>
+  </button>
+</nav>

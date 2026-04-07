@@ -1,0 +1,22 @@
+<section class="bg-white rounded-lg shadow-sm mx-4 mb-4 p-4">
+  <h1 class="text-lg font-semibold mb-3 text-gray-800">Files</h1>
+
+  <div class="mt-3 grid grid-cols-2 sm:grid-cols-4 gap-2">
+    <button mat-stroked-button class="justify-between" (click)="$event.stopPropagation()">
+      Type
+      <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+    <button mat-stroked-button class="justify-between" (click)="$event.stopPropagation()">
+      Owner
+      <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+    <button mat-stroked-button class="justify-between" (click)="$event.stopPropagation()">
+      Modified
+      <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+    <button mat-stroked-button class="justify-between" (click)="$event.stopPropagation()">
+      Location
+      <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+  </div>
+</section>
