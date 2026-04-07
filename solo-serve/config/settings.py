@@ -1,11 +1,15 @@
 import os
 from pathlib import Path
+import environ
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "replace-me-with-a-secure-key")
-DEBUG = os.environ.get("DJANGO_DEBUG", "1") == "1"
-ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "*").split(",")
+env = environ.Env()
+env.read_env(BASE_DIR / '.env')
+
+SECRET_KEY = env('DJANGO_SECRET_KEY', default='replace-me-with-a-secure-key')
+DEBUG = env.bool('DJANGO_DEBUG', default=True)
+ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['*'])
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -52,15 +56,15 @@ WSGI_APPLICATION = "config.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.environ.get("POSTGRES_DB", "solo_serve_db"),
-        "USER": os.environ.get("POSTGRES_USER", "postgres"),
-        "PASSWORD": os.environ.get("POSTGRES_PASSWORD", ""),
-        "HOST": os.environ.get("POSTGRES_HOST", "localhost"),
-        "PORT": os.environ.get("POSTGRES_PORT", "5432"),
+        "NAME": env('POSTGRES_DB', default='solo_serve_db'),
+        "USER": env('POSTGRES_USER', default='postgres'),
+        "PASSWORD": env('POSTGRES_PASSWORD', default=''),
+        "HOST": env('POSTGRES_HOST', default='localhost'),
+        "PORT": env('POSTGRES_PORT', default='5432'),
     }
 }
 
-if os.environ.get("DJANGO_USE_SQLITE", "0") == "1":
+if env.bool('DJANGO_USE_SQLITE', default=False):
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",

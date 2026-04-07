@@ -4,17 +4,12 @@ Django REST API backend for Angular and external services.
 
 ## Setup
 
-1. Install dependencies:
+1. Create a `.env` file in the project root with your environment variables (see `.env` for an example).
+
+2. Install dependencies:
    ```bash
    python -m pip install -r requirements.txt
    ```
-
-2. Set Postgres environment variables or use defaults:
-   - `POSTGRES_DB` (default: `solo_serve_db`)
-   - `POSTGRES_USER` (default: `postgres`)
-   - `POSTGRES_PASSWORD`
-   - `POSTGRES_HOST` (default: `localhost`)
-   - `POSTGRES_PORT` (default: `5432`)
 
 3. Run migrations:
    ```bash
