@@ -1,0 +1,23 @@
+[project]
+name = "solo-serve"
+version = "0.1.0"
+description = "Django REST API backend for Angular and external services."
+requires-python = ">=3.11"
+dependencies = [
+    "Django==5.2.12",
+    "djangorestframework==3.17.1",
+    "drf-spectacular==0.29.0",
+    "psycopg[binary]==3.3.3",
+]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "config.settings"
+python_files = ["tests.py", "test_*.py", "*_tests.py"]
+addopts = "--strict-markers"
+
+[tool.coverage.run]
+branch = true
+source = ["config", "solo_serve"]
+
+[tool.coverage.report]
+show_missing = true
