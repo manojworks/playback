@@ -31,3 +31,5 @@ yarn-error.log*
 solo-web/.editorconfig
 /solo-web/.vscode
 >>>>>>> solo-web/main
+data/.DS_Store
+.DS_Store

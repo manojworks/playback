@@ -1,6 +1,7 @@
 Django==5.2.12
 djangorestframework==3.17.1
 drf-spectacular==0.29.0
+django-filter==24.1
 psycopg[binary]==3.3.3
 pytest==8.4.2
 pytest-django==4.5.2
