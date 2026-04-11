@@ -21,7 +21,7 @@ RUN npm run build -- --configuration production
 FROM nginx:alpine
 
 # Copy built app from build stage
-COPY --from=build /app/dist/solo-web /usr/share/nginx/html
+COPY --from=build /app/dist/solo-web/browser /usr/share/nginx/html
 
 # Copy custom nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
