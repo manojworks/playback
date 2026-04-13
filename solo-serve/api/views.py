@@ -4,6 +4,7 @@ from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django_filters.rest_framework import DjangoFilterBackend
+from drf_spectacular.utils import extend_schema, OpenApiParameter, OpenApiTypes
 
 from .filters import SongFilter
 from .models import Song
@@ -38,7 +39,72 @@ class SongViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class SongSearchAPIView(APIView):
+    @extend_schema(
+        description="Search songs by multiple criteria including title, singers, music directors, actors, and lyrics.",
+        parameters=[
+            OpenApiParameter(
+                name="q",
+                description="Search query string. Can also use 'query' or 'search' parameter.",
+                required=False,
+                type=OpenApiTypes.STR,
+            ),
+            OpenApiParameter(
+                name="query",
+                description="Alternative search query parameter.",
+                required=False,
+                type=OpenApiTypes.STR,
+            ),
+            OpenApiParameter(
+                name="search",
+                description="Alternative search query parameter.",
+                required=False,
+                type=OpenApiTypes.STR,
+            ),
+            OpenApiParameter(
+                name="singers",
+                description="Comma-separated list of singer names to filter by.",
+                required=False,
+                type=OpenApiTypes.STR,
+            ),
+            OpenApiParameter(
+                name="music_directors",
+                description="Comma-separated list of music director names to filter by.",
+                required=False,
+                type=OpenApiTypes.STR,
+            ),
+            OpenApiParameter(
+                name="lyricist",
+                description="Comma-separated list of lyricist names to filter by.",
+                required=False,
+                type=OpenApiTypes.STR,
+            ),
+            OpenApiParameter(
+                name="actors",
+                description="Comma-separated list of actor names to filter by.",
+                required=False,
+                type=OpenApiTypes.STR,
+            ),
+            OpenApiParameter(
+                name="limit",
+                description="Number of results to return per page. Default is 20.",
+                required=False,
+                type=OpenApiTypes.INT,
+            ),
+            OpenApiParameter(
+                name="offset",
+                description="The initial index from which to return the results.",
+                required=False,
+                type=OpenApiTypes.INT,
+            ),
+        ],
+        responses={200: SongSearchSerializer(many=True)},
+    )
     def get(self, request):
+        """
+        Search for songs based on query terms and metadata filters.
+        
+        Returns paginated results with limit/offset pagination.
+        """
         query = (
             request.query_params.get("q")
             or request.query_params.get("query")
