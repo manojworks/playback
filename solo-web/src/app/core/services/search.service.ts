@@ -78,6 +78,7 @@ export class SearchService {
 
     // Make API call if not in cache
     const searchUrl = `${API_CONFIG.baseUrl}${API_CONFIG.endpoints.search}`;
+    console.log('Searching songs:', searchUrl, 'with query:', trimmedQuery);
     return this.http.get(searchUrl, {
       params: { q: trimmedQuery }
     }).pipe(
