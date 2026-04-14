@@ -1,0 +1,355 @@
+openapi: 3.0.3
+info:
+  title: solo-serve API
+  version: 1.0.0
+  description: REST API for Angular and external services.
+paths:
+  /api/v1/hello/:
+    get:
+      operationId: v1_hello_retrieve
+      tags:
+      - v1
+      responses:
+        '200':
+          description: No response body
+  /api/v1/search/:
+    get:
+      operationId: v1_search_list
+      description: Search songs by multiple criteria including title, singers, music
+        directors, actors, and lyrics.
+      parameters:
+      - in: query
+        name: actors
+        schema:
+          type: string
+        description: Comma-separated list of actor names to filter by.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+        description: Number of results to return per page. Default is 20.
+      - in: query
+        name: lyricist
+        schema:
+          type: string
+        description: Comma-separated list of lyricist names to filter by.
+      - in: query
+        name: music_directors
+        schema:
+          type: string
+        description: Comma-separated list of music director names to filter by.
+      - in: query
+        name: offset
+        schema:
+          type: integer
+        description: The initial index from which to return the results.
+      - in: query
+        name: q
+        schema:
+          type: string
+        description: Search query string. Can also use 'query' or 'search' parameter.
+      - in: query
+        name: query
+        schema:
+          type: string
+        description: Alternative search query parameter.
+      - in: query
+        name: search
+        schema:
+          type: string
+        description: Alternative search query parameter.
+      - in: query
+        name: singers
+        schema:
+          type: string
+        description: Comma-separated list of singer names to filter by.
+      tags:
+      - v1
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SongSearch'
+          description: ''
+  /api/v1/songs/:
+    get:
+      operationId: v1_songs_list
+      parameters:
+      - in: query
+        name: actors
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: album
+        schema:
+          type: string
+      - in: query
+        name: categories
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: query
+        name: music_directors
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - in: query
+        name: release_year
+        schema:
+          type: integer
+      - in: query
+        name: release_year__gte
+        schema:
+          type: integer
+      - in: query
+        name: release_year__lte
+        schema:
+          type: integer
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - in: query
+        name: singers
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: song_id
+        schema:
+          type: string
+      - in: query
+        name: song_title_dn
+        schema:
+          type: string
+      - in: query
+        name: song_title_en
+        schema:
+          type: string
+      tags:
+      - v1
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedSongList'
+          description: ''
+  /api/v1/songs/{song_id}/:
+    get:
+      operationId: v1_songs_retrieve
+      parameters:
+      - in: path
+        name: song_id
+        schema:
+          type: string
+        description: A unique value identifying this song.
+        required: true
+      tags:
+      - v1
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Song'
+          description: ''
+components:
+  schemas:
+    PaginatedSongList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Song'
+    Song:
+      type: object
+      properties:
+        song_id:
+          type: string
+          maxLength: 100
+        song_url:
+          type: string
+          format: uri
+          maxLength: 500
+        song_title_en:
+          type: string
+          maxLength: 500
+        song_title_dn:
+          type: string
+          maxLength: 500
+        singers:
+          type: array
+          items:
+            type: string
+            maxLength: 200
+        music_directors:
+          type: array
+          items:
+            type: string
+            maxLength: 200
+        actors:
+          type: array
+          items:
+            type: string
+            maxLength: 200
+        lyricist:
+          type: array
+          items:
+            type: string
+            maxLength: 200
+        album:
+          type: string
+          maxLength: 500
+        release_year:
+          type: integer
+          maximum: 32767
+          minimum: -32768
+          nullable: true
+        categories:
+          type: array
+          items:
+            type: string
+            maxLength: 200
+        audio_url:
+          type: string
+          format: uri
+          maxLength: 500
+        video_url:
+          type: string
+          format: uri
+          maxLength: 500
+        lyrics_text_file:
+          type: string
+          maxLength: 500
+        lyrics_image_file:
+          type: string
+          maxLength: 500
+        lyrics_text_en:
+          type: string
+        lyrics_text_dn:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - created_at
+      - song_id
+      - updated_at
+    SongSearch:
+      type: object
+      properties:
+        song_id:
+          type: string
+          maxLength: 100
+        song_url:
+          type: string
+          maxLength: 500
+        song_title_en:
+          type: string
+          maxLength: 500
+        singers:
+          type: array
+          items:
+            type: string
+            maxLength: 200
+        music_directors:
+          type: array
+          items:
+            type: string
+            maxLength: 200
+        actors:
+          type: array
+          items:
+            type: string
+            maxLength: 200
+        lyricist:
+          type: array
+          items:
+            type: string
+            maxLength: 200
+        album:
+          type: string
+          maxLength: 500
+        release_year:
+          type: integer
+          maximum: 32767
+          minimum: -32768
+          nullable: true
+        categories:
+          type: array
+          items:
+            type: string
+            maxLength: 200
+        audio_url:
+          type: string
+          maxLength: 500
+        video_url:
+          type: string
+          maxLength: 500
+        lyrics_text_en:
+          type: string
+      required:
+      - song_id
