@@ -7,7 +7,7 @@
           <th class="text-left py-3 px-4 font-semibold text-sm text-gray-800 w-1/5">Singers</th>
           <th class="text-left py-3 px-4 font-semibold text-sm text-gray-800 w-1/5">Composers</th>
           <th class="text-left py-3 px-4 font-semibold text-sm text-gray-800 w-1/5">Movie</th>
-          <th class="text-left py-3 px-4 font-semibold text-sm text-gray-800 w-1/5">Info</th>
+          <th class="text-left py-3 px-4 font-semibold text-sm text-gray-800 w-1/5">Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -16,7 +16,25 @@
           <td class="py-3 px-4 text-sm text-gray-700 truncate">{{ song.singers }}</td>
           <td class="py-3 px-4 text-sm text-gray-700 truncate">{{ song.composers }}</td>
           <td class="py-3 px-4 text-sm text-gray-700 truncate">{{ song.movie }}</td>
-          <td class="py-3 px-4 text-sm text-gray-700 truncate">{{ song.info }}</td>
+          <td class="py-3 px-4 text-sm text-gray-700">
+            <div class="action-toolbar">
+              <button mat-icon-button aria-label="Details" title="Details" (click)="onDetails(song)">
+                <mat-icon>info</mat-icon>
+              </button>
+              <button mat-icon-button aria-label="Lyrics" title="Lyrics" (click)="onLyrics(song)">
+                <mat-icon>music_note</mat-icon>
+              </button>
+              <button mat-icon-button aria-label="Play" title="Play" (click)="onPlay(song)">
+                <mat-icon>play_arrow</mat-icon>
+              </button>
+              <button mat-icon-button aria-label="Record" title="Record" (click)="onRecord(song)">
+                <mat-icon>mic</mat-icon>
+              </button>
+              <button mat-icon-button aria-label="Like" title="Like" (click)="onLike(song)">
+                <mat-icon>favorite_border</mat-icon>
+              </button>
+            </div>
+          </td>
         </tr>
       </tbody>
     </table>

@@ -82,10 +82,6 @@ export class SearchService {
       params: { q: trimmedQuery }
     }).pipe(
       map((apiResults: any) => {
-        console.log('API Response:', apiResults); // Debug log
-        console.log('API Response type:', typeof apiResults); // Debug log
-        console.log('Is array?', Array.isArray(apiResults)); // Debug log
-
         // Handle different response formats
         let resultsArray: SongSearchResponse[] = [];
         if (Array.isArray(apiResults)) {

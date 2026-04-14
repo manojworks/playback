@@ -33,4 +33,24 @@ export class ListingsPanelComponent implements OnInit, OnDestroy {
     this.destroy$.next();
     this.destroy$.complete();
   }
+
+  onDetails(song: Song): void {
+    console.log('Details action clicked', song);
+  }
+
+  onLyrics(song: Song): void {
+    console.log('Lyrics action clicked', song);
+  }
+
+  onPlay(song: Song): void {
+    console.log('Play action clicked', song);
+  }
+
+  onRecord(song: Song): void {
+    console.log('Record action clicked', song);
+  }
+
+  onLike(song: Song): void {
+    console.log('Like action clicked', song);
+  }
 }
