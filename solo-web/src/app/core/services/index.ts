@@ -2,3 +2,4 @@ export { AudioService, type AudioState } from './audio.service';
 export { PlaylistService, type PlaylistState, type Track } from './playlist.service';
 export { StorageService } from './storage.service';
 export { SearchService, type Song } from './search.service';
+export { SongService, type SongDetails } from './song.service';

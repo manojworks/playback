@@ -1,0 +1,53 @@
+<div class="popup-backdrop" (click)="handleClose()">
+  <div class="popup-panel" (click)="$event.stopPropagation()">
+    <div class="popup-header">
+      <div class="popup-title">{{ song?.title || 'Song Details' }}</div>
+      <button class="close-button" aria-label="Close" (click)="handleClose()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <div class="popup-summary">
+      <div class="song-image">
+        <span>Image</span>
+      </div>
+      <div class="song-meta">
+        <div class="meta-row">
+          <span class="meta-label">Movie</span>
+          <span>{{ song?.movie || 'Unknown' }}</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-label">Release</span>
+          <span>{{ song?.release_year || 'TBD' }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="popup-details">
+      <div class="detail-row">
+        <span class="detail-label">Singers</span>
+        <span>{{ song?.singers?.join(', ') || 'Not available' }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Composers</span>
+        <span>{{ song?.composers?.join(', ') || 'Not available' }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Lyricists</span>
+        <span>{{ song?.lyricists?.join(', ') || 'Not available' }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Actors</span>
+        <span>{{ song?.actors?.join(', ') || 'Not available' }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Categories</span>
+        <span>{{ song?.categories?.join(', ') || 'Not available' }}</span>
+      </div>
+      <div class="detail-row lyrics-row">
+        <span class="detail-label">Lyrics</span>
+        <div class="lyrics-body">{{ song?.lyrics }}</div>
+      </div>
+    </div>
+  </div>
+</div>

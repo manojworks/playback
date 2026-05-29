@@ -8,6 +8,7 @@ export const API_CONFIG = {
   endpoints: {
     search: '/api/v1/search',
     songs: '/api/v1/songs',
+    songDetails: '/api/v1/songs/',
     hello: '/api/v1/hello'
   }
 };

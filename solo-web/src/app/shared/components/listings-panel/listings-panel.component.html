@@ -39,4 +39,10 @@
       </tbody>
     </table>
   </div>
+
+  <app-song-details-popup
+    *ngIf="selectedSongDetails"
+    [song]="selectedSongDetails"
+    (close)="closeDetails()"
+  ></app-song-details-popup>
 </section>
