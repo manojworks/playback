@@ -66,6 +66,29 @@ class SongSerializer(serializers.ModelSerializer):
         return attrs
 
 
+class SongDetailSerializer(serializers.ModelSerializer):
+    singers = StringListField(required=False)
+    music_directors = StringListField(required=False)
+    actors = StringListField(required=False)
+    lyricist = StringListField(required=False)
+    categories = StringListField(required=False)
+
+    class Meta:
+        model = Song
+        fields = [
+            "song_id",
+            "song_title_en",
+            "singers",
+            "music_directors",
+            "actors",
+            "lyricist",
+            "album",
+            "release_year",
+            "categories",
+            "lyrics_text_en",
+        ]
+
+
 class SongSearchSerializer(serializers.ModelSerializer):
     singers = StringListField(required=False)
     music_directors = StringListField(required=False)

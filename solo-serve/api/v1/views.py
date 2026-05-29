@@ -19,6 +19,8 @@ class HelloWorldAPIView(APIView):
 class SongViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Song.objects.all()
     serializer_class = SongSerializer
+    lookup_field = "song_id"
+    lookup_url_kwarg = "songId"
     filter_backends = [DjangoFilterBackend, filters.OrderingFilter, filters.SearchFilter]
     filterset_class = SongFilter
     ordering_fields = [
@@ -36,6 +38,13 @@ class SongViewSet(viewsets.ReadOnlyModelViewSet):
         "lyrics_text_en",
         "lyrics_text_dn",
     ]
+
+    def get_serializer_class(self):
+        if self.action == "retrieve":
+            from ..serializers import SongDetailSerializer
+
+            return SongDetailSerializer
+        return self.serializer_class
 
 
 class SongSearchAPIView(APIView):
