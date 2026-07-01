@@ -10,7 +10,7 @@
     <mat-form-field appearance="outline" class="w-full">
       <mat-icon matPrefix class="text-gray-500">search</mat-icon>
       <input #searchInput matInput aria-label="Search" placeholder="Search for Music" (keyup.enter)="onSearch(searchInput.value)" />
-      <button mat-icon-button matSuffix aria-label="Clear">
+      <button mat-icon-button matSuffix aria-label="Clear" type="button" (click)="clearSearch(searchInput)">
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>

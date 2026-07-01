@@ -24,4 +24,9 @@ export class TopBarComponent {
       });
     }
   }
+
+  clearSearch(input: HTMLInputElement): void {
+    input.value = '';
+    this.searchService.searchSongs('').subscribe();
+  }
 }
