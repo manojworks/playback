@@ -39,3 +39,40 @@ body {
   height: 100%;
 }
 /* You can add global styles to this file, and also import other style files */
+
+/* In src/styles.scss (Global) */
+.search-pill-container.search-pill-container { /* Double class increases priority */
+  height: 40px !important;
+
+  .mat-mdc-text-field-wrapper {
+    height: 40px !important;
+    min-height: 40px !important;
+    border: 1px solid #74777f !important;
+    border-radius: 20px !important;
+    overflow: hidden !important;
+    display: flex !important;
+    align-items: center !important;
+    background-color: transparent;
+  }
+
+  .mdc-notched-outline {
+    display: none !important;
+  }
+
+  .mat-mdc-form-field-subscript-wrapper {
+    display: none !important;
+  }
+
+  .mat-mdc-form-field-infix {
+    padding: 0 !important;
+    min-height: auto !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+}
+
+input.mat-mdc-input-element {
+  height: 40px !important;      /* 1. Make the input fill the full height */
+  line-height: 40px !important; /* 2. Force text to the vertical center */
+  padding: 0 !important;        /* 3. Remove internal offsets */
+}

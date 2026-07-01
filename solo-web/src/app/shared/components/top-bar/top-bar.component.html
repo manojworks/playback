@@ -6,8 +6,8 @@
     <span class="font-medium text-xl text-gray-800">Solo</span>
   </div>
 
-  <div class="flex-1 max-w-2xl mx-8">
-    <mat-form-field appearance="outline" class="w-full">
+  <div class="flex-1 max-w-2xl mx-8 flex items-center search-pill-container">
+    <mat-form-field appearance="outline" subscriptSizing="dynamic" class="search-bar w-full">
       <mat-icon matPrefix class="text-gray-500">search</mat-icon>
       <input #searchInput matInput aria-label="Search" placeholder="Search for Music" (keyup.enter)="onSearch(searchInput.value)" />
       <button mat-icon-button matSuffix aria-label="Clear" type="button" (click)="clearSearch(searchInput)">

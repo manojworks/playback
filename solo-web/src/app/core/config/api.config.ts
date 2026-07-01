@@ -4,7 +4,7 @@
  */
 
 export const API_CONFIG = {
-  baseUrl: 'http://localhost:8000', // Change this for different environments
+  baseUrl: 'http://10.0.0.34:8000', // Change this for different environments
   endpoints: {
     search: '/api/v1/search',
     songs: '/api/v1/songs',
