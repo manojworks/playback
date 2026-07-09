@@ -17,6 +17,7 @@ export interface SongDetails {
   imageUrl?: string;
   audio_url?: string;
   video_url?: string;
+  duration?: number; // Duration in seconds
 }
 
 interface SongDetailsResponse {
