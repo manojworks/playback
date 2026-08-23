@@ -38,3 +38,7 @@ solo-web/package-lock.json
 solo-web/package-lock.json
 solo-web/package-lock.json
 /solo-web
+data/data-forge/clean-names/.env
+/data/data-forge/clean-names/.idea
+/data/data-forge/clean-names/__pycache__
+solo-serve/config/settings.py
