@@ -2,7 +2,7 @@ import os
 from contextlib import contextmanager
 from typing import List, Dict, Any
 
-import psycopg2
+import psycopg
 from dotenv import load_dotenv
 from psycopg2.extras import RealDictCursor
 
@@ -22,7 +22,7 @@ DB_CONFIG = {
 def get_db_connection():
     """Context manager for handling DB connections safely."""
     #TODO: Error Handling & Transaction management needed here?
-    conn = psycopg2.connect(**DB_CONFIG)
+    conn = psycopg.connect(**DB_CONFIG)
     try:
         yield conn
     finally:
